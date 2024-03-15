@@ -1,0 +1,590 @@
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">amstrates_rates_form.amstrates_rates_form_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="Amasty\ShippingTableRates\Block\Adminhtml\Rates\Edit\BackButton"/>
+            <button name="delete" class="Amasty\ShippingTableRates\Block\Adminhtml\Rates\Edit\DeleteButton"/>
+            <button name="reset" class="Amasty\ShippingTableRates\Block\Adminhtml\Rates\Edit\ResetButton"/>
+            <button name="save_and_continue" class="Amasty\ShippingTableRates\Block\Adminhtml\Rates\Edit\SaveAndNewButton"/>
+            <button name="save" class="Amasty\ShippingTableRates\Block\Adminhtml\Rates\Edit\SaveButton"/>
+        </buttons>
+        <namespace>amstrates_rates_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>amstrates_rates_form.amstrates_rates_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="amstrates_rates_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="amstrates/rates/save"/>
+        </settings>
+        <dataProvider class="Amasty\ShippingTableRates\Ui\Component\Form\Rate\DataProvider"
+                      name="amstrates_rates_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="destination">
+        <settings>
+            <collapsible>false</collapsible>
+            <opened>true</opened>
+            <label translate="true">Destination</label>
+        </settings>
+        <field name="method_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amstrates_rates</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>method_id</dataScope>
+            </settings>
+        </field>
+        <field name="country" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="source" xsi:type="string">amstrates_rates</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>select</dataType>
+                <label translate="true">Country</label>
+                <visible>true</visible>
+                <dataScope>country</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Amasty\ShippingTableRates\Model\Source\Option\CountryOptions"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="state" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="source" xsi:type="string">amstrates_rates</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>select</dataType>
+                <label translate="true">State</label>
+                <visible>true</visible>
+                <dataScope>state</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Amasty\ShippingTableRates\Model\Source\Option\StateOptions"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="city" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="source" xsi:type="string">amstrates_rates</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">City</label>
+                <visible>true</visible>
+                <dataScope>city</dataScope>
+            </settings>
+        </field>
+        <container name="grouped_zip">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="template" xsi:type="string">Amasty_ShippingTableRates/ui/element/group</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">If you ship to a specific zip code range in the UK, Canada, or the Netherlands, please make sure that you selected the ‘Strings, AB%’ mode in the module general settings to ensure alphanumeric postcode support. Learn more about it from <a target="_blank" title="Blog" href="https://amasty.com/blog/shipping-table-rates-postcode-systems-and-in-store-pickup/?utm_source=extension&utm_medium=hint&utm_campaign=shtabrates-m2-17">this article</a>.</span>]]></item>
+                </item>
+            </argument>
+            <field name="zip_from" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="addbefore" xsi:type="string" translate="true">From</item>
+                        <item name="source" xsi:type="string">amstrates_rates</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Zip</label>
+                    <visible>true</visible>
+                    <dataScope>zip_from</dataScope>
+                </settings>
+            </field>
+            <field name="zip_to" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="addbefore" xsi:type="string" translate="true">To</item>
+                        <item name="source" xsi:type="string">amstrates_rates</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <visible>true</visible>
+                    <dataScope>zip_to</dataScope>
+                </settings>
+            </field>
+        </container>
+    </fieldset>
+    <fieldset name="conditions">
+        <settings>
+            <collapsible>false</collapsible>
+            <opened>true</opened>
+            <label translate="true">Conditions</label>
+        </settings>
+        <container name="grouped_weight">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="template" xsi:type="string">Amasty_ShippingTableRates/ui/element/group</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">Specify the weight range the shipping rate can be applied to. The weight of products with the same Shipping Type will be automatically summarized by the system and counted together.</span>]]></item>
+                </item>
+            </argument>
+            <field name="weight_from" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="addbefore" xsi:type="string" translate="true">From</item>
+                        <item name="source" xsi:type="string">amstrates_rates</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Weight</label>
+                    <visible>true</visible>
+                    <dataScope>weight_from</dataScope>
+                    <validation>
+                        <rule name="validate-number" xsi:type="boolean">true</rule>
+                        <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                    </validation>
+                </settings>
+            </field>
+            <field name="weight_to" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="addbefore" xsi:type="string" translate="true">To</item>
+                        <item name="source" xsi:type="string">amstrates_rates</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <visible>true</visible>
+                    <dataScope>weight_to</dataScope>
+                    <validation>
+                        <rule name="validate-number" xsi:type="boolean">true</rule>
+                        <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                    </validation>
+                </settings>
+            </field>
+        </container>
+        <container name="grouped_qty">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="template" xsi:type="string">Amasty_ShippingTableRates/ui/element/group</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">Specify the number of items the shipping rate can be applied to. The number of products with the same Shipping Type will be automatically summarized by the system and counted together.</span>]]></item>
+                </item>
+            </argument>
+            <field name="qty_from" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="addbefore" xsi:type="string" translate="true">From</item>
+                        <item name="source" xsi:type="string">amstrates_rates</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Qty</label>
+                    <visible>true</visible>
+                    <dataScope>qty_from</dataScope>
+                    <validation>
+                        <rule name="validate-number" xsi:type="boolean">true</rule>
+                        <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                    </validation>
+                </settings>
+            </field>
+            <field name="qty_to" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="addbefore" xsi:type="string" translate="true">To</item>
+                        <item name="source" xsi:type="string">amstrates_rates</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <visible>true</visible>
+                    <dataScope>qty_to</dataScope>
+                    <validation>
+                        <rule name="validate-number" xsi:type="boolean">true</rule>
+                        <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                    </validation>
+                </settings>
+            </field>
+        </container>
+        <field name="shipping_type" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amstrates_rates</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>select</dataType>
+                <label translate="true">Shipping Type</label>
+                <visible>true</visible>
+                <dataScope>shipping_type</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Amasty\ShippingTableRates\Model\Source\Option\ShippingTypeOptions"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <container name="grouped_price">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="template" xsi:type="string">Amasty_ShippingTableRates/ui/element/group</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">Determine the span of the product price (original product price, before discounts) the shipping rate can be applied to. The system will summarize the prices of products with the same Shipping Type and count them as a single price.</span>]]></item>
+                </item>
+            </argument>
+            <field name="price_from" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="addbefore" xsi:type="string" translate="true">From</item>
+                        <item name="source" xsi:type="string">amstrates_rates</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Price</label>
+                    <visible>true</visible>
+                    <dataScope>price_from</dataScope>
+                    <validation>
+                        <rule name="validate-number" xsi:type="boolean">true</rule>
+                        <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                    </validation>
+                </settings>
+            </field>
+            <field name="price_to" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="addbefore" xsi:type="string" translate="true">To</item>
+                        <item name="source" xsi:type="string">amstrates_rates</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <visible>true</visible>
+                    <dataScope>price_to</dataScope>
+                    <validation>
+                        <rule name="validate-number" xsi:type="boolean">true</rule>
+                        <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                    </validation>
+                </settings>
+            </field>
+        </container>
+        <field name="time_delivery" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amstrates_rates</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Estimated Delivery (days)</label>
+                <visible>true</visible>
+                <dataScope>time_delivery</dataScope>
+                <notice translate="true">This value will be used for the {day} variable in the Method name.</notice>
+            </settings>
+        </field>
+        <field name="name_delivery" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amstrates_rates</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Name Delivery</label>
+                <visible>true</visible>
+                <dataScope>name_delivery</dataScope>
+                <notice translate="true">This value will be used for the {name} variable in the Method name.</notice>
+            </settings>
+        </field>
+        <field name="source_codes" formElement="input" class="Amasty\ShippingTableRates\Ui\Component\Form\Rate\Field\Source">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Source</label>
+                <dataType>text</dataType>
+                <dataScope>source_codes</dataScope>
+                <notice translate="true">Select sources this rate will be applied to. Leave empty to apply this rate regardless of the source the product will be shipped from.</notice>
+            </settings>
+        </field>
+        <container name="buttons">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="targetField" xsi:type="string">${$.parentName}.source_codes</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="label" xsi:type="string" translate="true">Select Sources:</item>
+                    <item name="labelVisible" xsi:type="boolean">true</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="visible" xsi:type="string">${$.parentName}.source_codes:visible</item>
+                    </item>
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="componentType" xsi:type="string">container</item>
+                    <item name="component" xsi:type="string">Amasty_ShippingTableRates/js/form/select-sources-button</item>
+                    <item name="template" xsi:type="string">ui/form/components/button/container</item>
+                    <item name="additionalClasses" xsi:type="string">admin__field-small</item>
+                    <item name="title" xsi:type="string" translate="true">Select Sources</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="targetName" xsi:type="string">${$.parentName}.amasty_amstratres_rate_sources_form_modal</item>
+                            <item name="actionName" xsi:type="string">toggleModal</item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="targetName" xsi:type="string">${$.name}</item>
+                            <item name="actionName" xsi:type="string">onModalOpen</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </container>
+        <modal name="amasty_amstratres_rate_sources_form_modal">
+            <settings>
+                <options>
+                    <option name="title" xsi:type="string" translate="true">Select Sources</option>
+                    <option name="buttons" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="text" xsi:type="string">Cancel</item>
+                            <item name="class" xsi:type="string">action-secondary</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">${ $.name }</item>
+                                    <item name="actionName" xsi:type="string">actionCancel</item>
+                                </item>
+                            </item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="text" xsi:type="string" translate="true">Done</item>
+                            <item name="class" xsi:type="string">action-primary</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">index = inventory_sources</item>
+                                    <item name="actionName" xsi:type="string">save</item>
+                                </item>
+                                <item name="1" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">${ $.name }</item>
+                                    <item name="actionName" xsi:type="string">actionDone</item>
+                                </item>
+                            </item>
+                        </item>
+                    </option>
+                </options>
+            </settings>
+            <insertListing name="inventory_sources" component="Amasty_ShippingTableRates/js/modal/listing/insert-listing">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="targetField" xsi:type="string">amstrates_rates_form.amstrates_rates_form.conditions.source_codes</item>
+                        <item name="cssclass" xsi:type="string">noclass</item>
+                    </item>
+                </argument>
+                <settings>
+                    <autoRender>true</autoRender>
+                    <dataScope>inventory_sources</dataScope>
+                    <ns>inventory_source_listing</ns>
+                    <externalProvider>inventory_source_listing.inventory_source_listing_data_source</externalProvider>
+                    <selectionsProvider>inventory_source_listing.inventory_source_listing.inventory_source_listing_columns.ids</selectionsProvider>
+                    <externalFilterMode>true</externalFilterMode>
+                    <dataLinks>
+                        <imports>false</imports>
+                        <exports>true</exports>
+                    </dataLinks>
+                </settings>
+            </insertListing>
+        </modal>
+    </fieldset>
+    <fieldset name="rate">
+        <settings>
+            <collapsible>false</collapsible>
+            <opened>true</opened>
+            <label translate="true">Rate</label>
+        </settings>
+        <field name="cost_base" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amstrates_rates</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Base Rate for the Order</label>
+                <visible>true</visible>
+                <dataScope>cost_base</dataScope>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="cost_percent" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amstrates_rates</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Percentage per Product</label>
+                <visible>true</visible>
+                <dataScope>cost_percent</dataScope>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="cost_product" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amstrates_rates</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Fixed Rate per Product</label>
+                <visible>true</visible>
+                <dataScope>cost_product</dataScope>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="unit_weight_conversion" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amstrates_rates</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Weight Unit Conversion Rate</label>
+                <visible>true</visible>
+                <dataScope>unit_weight_conversion</dataScope>
+                <notice translate="true">Set a custom rate if you need to convert weight measurement units or define the weight of a batch. For example: if product weight is being measured in pounds but shipping price has to be estimated in kilograms - please enter 2,2047 here. Leave '1' to maintain no conversion rate.</notice>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-greater-than-zero" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="weight_rounding" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amstrates_rates</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>select</dataType>
+                <label translate="true">Weight Rounding</label>
+                <visible>true</visible>
+                <dataScope>weight_rounding</dataScope>
+                <notice translate="true">It will round the weight to the nearest integer number.</notice>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Amasty\ShippingTableRates\Model\Source\Option\WeightRoundingOptions"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="cost_weight" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amstrates_rates</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Rate per Unit of Weight</label>
+                <visible>true</visible>
+                <dataScope>cost_weight</dataScope>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="start_weight" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amstrates_rates</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Count Weight From</label>
+                <visible>true</visible>
+                <dataScope>start_weight</dataScope>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+    </fieldset>
+</form>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <payment>
+            <magenest_barclaycard>
+                <active>0</active>
+                <title>Barclaycard ePDQ Payment</title>
+                <payment_action>authorize_capture</payment_action>
+                <hash_algorithm>sha1</hash_algorithm>
+                <test>0</test>
+                <language_code>en_US</language_code>
+                <description>Magento 2 barclaycard HPP</description>
+                <btn_bg_color>FFFFFF</btn_bg_color>
+                <btn_txt_color>000000</btn_txt_color>
+                <bg_color>FFFFFF</bg_color>
+                <txt_color>000000</txt_color>
+                <tbl_bg_color>FFFFFF</tbl_bg_color>
+                <tbl_txt_color>000000</tbl_txt_color>
+                <font_type>Verdana</font_type>
+                <order_prefix>mg2</order_prefix>
+                <order_expire_min>15</order_expire_min>
+                <model>Magenest\Barclaycard\Model\BarclaycardPayment</model>
+            </magenest_barclaycard>
+            <barclaycard_direct>
+                <active>0</active>
+                <title>Barclaycard ePDQ Direct Link Payment</title>
+                <test>0</test>
+                <cctypes>JCB,AE,VI,MC,DI,OT</cctypes>
+                <useccv>1</useccv>
+                <threeds>0</threeds>
+                <allowspecific>0</allowspecific>
+                <payment_action>authorize_capture</payment_action>
+                <order_status>pending_payment</order_status>
+                <model>Magenest\Barclaycard\Model\BarclayDirect</model>
+                <order_status>processing</order_status>
+            </barclaycard_direct>
+        </payment>
+    </default>
+</config>

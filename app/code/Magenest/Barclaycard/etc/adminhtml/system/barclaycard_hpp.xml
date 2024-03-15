@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 Magenest. All rights reserved.
+ */
+-->
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="barclaycard_hpp" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label><![CDATA[ePDQ Hosted Payment Page integration (Recommend Integration)]]></label>
+        <comment>Process payments methods</comment>
+        <field id="web_config" translate="label" type="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Barclaycard config</label>
+            <frontend_model>Magenest\Barclaycard\Block\Adminhtml\Config\HppConfig</frontend_model>
+        </field>
+        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Enabled</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>payment/magenest_barclaycard/active</config_path>
+            <comment>Enabled the module in checkout page</comment>
+        </field>
+        <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Title</label>
+            <config_path>payment/magenest_barclaycard/title</config_path>
+            <comment>Payment method title displayed on Checkout page</comment>
+        </field>
+        <field id="allowspecific" translate="label" type="allowspecific" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Payment from Applicable Countries</label>
+            <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+            <config_path>payment/magenest_barclaycard/allowspecific</config_path>
+        </field>
+        <field id="specificcountry" translate="label" type="multiselect" sortOrder="26" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Payment from Specific Countries</label>
+            <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+            <config_path>payment/magenest_barclaycard/specificcountry</config_path>
+        </field>
+        <field id="payment_action" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Payment Action</label>
+            <config_path>payment/magenest_barclaycard/payment_action</config_path>
+            <source_model>Magenest\Barclaycard\Model\Source\PaymentAction</source_model>
+        </field>
+        <field id="sha_in_phrase" translate="label" type="obscure" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>SHA-in pass phrase</label>
+            <config_path>payment/magenest_barclaycard/sha_in_phrase</config_path>
+            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+            <comment>(Barclaycard ePDQ) Sha-in phrase can get in "Configuration->Technical information->Data and origin verification"</comment>
+        </field>
+        <field id="sha_out_phrase" translate="label" type="obscure" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>SHA-out pass phrase</label>
+            <config_path>payment/magenest_barclaycard/sha_out_phrase</config_path>
+            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+            <comment>
+                <![CDATA[
+                        (Barclaycard ePDQ) Sha-out phrase can get in "Configuration->Technical information->Transaction feedback"
+                        ]]>
+            </comment>
+        </field>
+        <field id="test" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Sandbox Mode Enabled</label>
+            <config_path>payment/magenest_barclaycard/test</config_path>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <comment><![CDATA[
+                        <strong>Test Sandbox Mode</strong>
+                        ]]>
+            </comment>
+        </field>
+        <field id="order_status" translate="label" type="select" sortOrder="100" showInDefault="1"
+               showInWebsite="1" showInStore="1">
+            <label>New Order Status</label>
+            <source_model>Magento\Sales\Model\Config\Source\Order\Status\Processing</source_model>
+            <config_path>payment/magenest_barclaycard/order_status</config_path>
+        </field>
+        <field id="sort_order" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Sort Order</label>
+            <frontend_class>validate-number</frontend_class>
+            <config_path>payment/magenest_barclaycard/sort_order</config_path>
+        </field>
+        <field id="language_code" translate="label" sortOrder="130" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+            <label>Language Code</label>
+            <config_path>payment/magenest_barclaycard/language_code</config_path>
+        </field>
+
+        <group id="additional_config" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Additional Configurations</label>
+            <field id="description" translate="label" sortOrder="120" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Title</label>
+                <config_path>payment/magenest_barclaycard/description</config_path>
+                <comment>Title and header of the page</comment>
+            </field>
+
+            <field id="bg_color" translate="label" sortOrder="130" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <label>Background colour</label>
+                <config_path>payment/magenest_barclaycard/bg_color</config_path>
+            </field>
+
+            <field id="txt_color" translate="label" sortOrder="140" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <label>Text colour</label>
+                <config_path>payment/magenest_barclaycard/txt_color</config_path>
+            </field>
+
+            <field id="tbl_bg_color" translate="label" sortOrder="150" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <label>Table background colour</label>
+                <config_path>payment/magenest_barclaycard/tbl_bg_color</config_path>
+            </field>
+
+            <field id="tbl_txt_color" translate="label" sortOrder="160" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <label>Table text colour</label>
+                <config_path>payment/magenest_barclaycard/tbl_txt_color</config_path>
+            </field>
+
+            <field id="btn_bg_color" translate="label" sortOrder="170" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <label>Button background colour</label>
+                <config_path>payment/magenest_barclaycard/btn_bg_color</config_path>
+            </field>
+            <field id="btn_txt_color" translate="label" sortOrder="180" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <label>Button text colour</label>
+                <config_path>payment/magenest_barclaycard/btn_txt_color</config_path>
+            </field>
+
+            <field id="font_type" translate="label" sortOrder="190" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <label>Font family</label>
+                <config_path>payment/magenest_barclaycard/font_type</config_path>
+            </field>
+
+            <field id="logo" translate="label" sortOrder="200" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Payment Logo Url</label>
+                <config_path>payment/magenest_barclaycard/logo</config_path>
+                <comment>
+                    <![CDATA[
+                        <p>
+                        URL/filename of the logo you want to
+                        display at the top of the payment
+                        page, next to the title. The URL must
+                        be absolute (i.e. contain the full path),
+                        it cannot be relative.
+                        </p>
+                        <p>
+                        The logo needs to be stored on a
+                        secure server.
+                        </p>
+                    ]]>
+                </comment>
+            </field>
+
+        </group>
+    </group>
+</include>

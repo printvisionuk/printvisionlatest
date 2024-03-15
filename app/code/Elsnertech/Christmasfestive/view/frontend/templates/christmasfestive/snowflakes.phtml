@@ -1,0 +1,21 @@
+<?php
+/**
+ * @author Elsner Team
+ * @copyright Copyright (c) 2023 Elsner Technologies Pvt. Ltd (https://www.elsner.com/)
+ * @package Elsnertech_Christmasfestive
+ */
+  $moduleEnableStatus = $block->moduleEnable();
+?>
+<?php if ($moduleEnableStatus == 1): ?>
+  <script>
+  
+    require(['jquery','Elsnertech_Christmasfestive/js/prototype','Elsnertech_Christmasfestive/js/snowflakes',
+     'Elsnertech_Christmasfestive/js/hse/hse'],
+    function($,prototype,snowflakes,hse)
+    {
+     var Snow = new InchooSnowflakes(<?=/* @noEscape */ $block->getJsonOptions(); ?>);
+     Snow.start();
+    });
+  </script>
+<?php endif; ?>
+

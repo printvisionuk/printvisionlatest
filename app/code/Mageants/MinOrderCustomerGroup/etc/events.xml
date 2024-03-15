@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- /**
+ * @category  Mageants MinOrderCustomerGroup
+ * @package   Mageants_MinOrderCustomerGroup
+ * @copyright Copyright (c) 2023 Mageants
+ * @author    Mageants Team <support@mageants.com>
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="mageants_minorder_customergroup_checkout_success" 
+        	instance="Mageants\MinOrderCustomerGroup\Observer\Orderplacebefore"/>
+    </event>
+</config>

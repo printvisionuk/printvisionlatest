@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author Elsner Team
+* @copyright Copyright (c) 2023 Elsner Technologies Pvt. Ltd (https://www.elsner.com/)
+* @package Elsnertech_Christmasfestive
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/App/etc/routes.xsd">
+    <router id="standard">
+        <route id="christmasfestive" frontName="christmasfestive">
+            <module name="Elsnertech_Christmasfestive" />
+        </route>
+    </router>
+</config>

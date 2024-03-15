@@ -1,0 +1,31 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject {{trans "Order #"}} {{var order_id}} {{trans " has been updated with Artwork"}} @-->
+<!--@vars {
+"var customer_name":"Customer Name",
+"var order_id":"Order Increment ID",
+"template config_path=\"design\/email\/footer_template\"":"Email Footer Template",
+"template config_path=\"design\/email\/header_template\"":"Email Header Template"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<p class="greeting">{{trans "Hello Admin"}},</p>
+<p> <h1>{{trans "Order ID : "}} {{var order_id}}</h1> </p>
+<p>
+    {{var customer_name}} {{trans " have uploaded Artwork to his order."}}
+</p>
+
+<ul>
+    <li><strong>{{trans "product SKU : "}}</strong> {{var product.sku}}</li>
+    <li><strong>{{trans "product Name : "}}</strong> {{var product.name}}</li>
+</ul>
+
+<p>{{trans "Thank you"}}</p>
+
+
+{{template config_path="design/email/footer_template"}}

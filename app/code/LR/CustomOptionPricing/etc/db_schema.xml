@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+   <table name="lr_custom_pricing_product_option_tierprice" resource="default" engine="innodb" comment="LR Custom Option Value Tier Price">
+      <column xsi:type="varchar" name="price" nullable="false" length="30" comment="Price" />
+   </table>
+</schema>

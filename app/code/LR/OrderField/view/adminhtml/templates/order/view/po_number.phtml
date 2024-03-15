@@ -1,0 +1,9 @@
+<?php $order = $block->getOrder(); ?> 
+ <div class="box">
+    <strong class="box-title">
+        <span><?= $block->escapeHtml(__('PO Number')) ?></span>
+    </strong>
+    <div class="box-content">
+        <?php echo $order->getPoNumber() ?>
+    </div>
+</div>

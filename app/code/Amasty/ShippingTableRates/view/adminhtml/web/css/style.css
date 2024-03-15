@@ -1,0 +1,11 @@
+select#am_shipping_type option:empty {
+    display: block !important;
+}
+
+.admin__field-medium.cut > .admin__field-control > .admin__control-addon  {
+    max-width: calc(100% - 45px - 4px);
+}
+
+.admin__field > .admin__field-control._with-comment  {
+    display: block;
+}

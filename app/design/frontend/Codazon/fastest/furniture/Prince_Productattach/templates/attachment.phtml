@@ -1,0 +1,69 @@
+<?php
+/** @var \Prince\Productattach\Block\Attachment $block */
+?>
+
+<?php if($block->isEnable()): ?>
+    <?php $productId = $block->getCurrentId(); ?>
+    <?php $attachments = $block->getAttachment($productId); ?>
+    <?php $isSize = $block->getConfig('productattach/general/attachmentsize'); ?>
+    <?php $productImage = $block->getProductImage();?>
+    <div class="attachments">
+        <?php /* if($productImage):?>
+            <div class="product-attachment">
+                <a href="<?php echo $productImage;?>" target="_blank" download>
+                    <div class="attachment-icon">
+                        <img src="<?php echo $productImage;?>"/>
+                    </div>
+                </a>
+            </div>
+        <?php endif; */ ?>
+        <ul>
+            <?php
+                $i = 0;
+                $count = count($attachments->getData());
+            ?>
+            <?php foreach ($attachments as $attachment) : ?>
+                <?php $i++; ?>
+                <?php if ($attachment->getActive()) : ?>
+                <li class="product-artwork <?php if($i==$count) {echo 'last';} ?>">
+                    <h2 class="name"><?php echo $attachment->getName(); ?></h2>
+                    <?php
+                        if (!empty($attachment->getArttemplate())) { ?>
+                            <img src="<?= $block->getAttachmentUrl($attachment->getArttemplate()); ?>"/>
+                        <?php }
+                    ?>
+                    <?php /* if ($attachment->getFile()) : */ ?>
+                    <p class="description"><?php echo $attachment->getDescription(); ?></p>
+                    <div class="product-attachment">
+                        <p style="float:left">
+                            
+                            <?php if ($attachment->getFile()) : 
+                                $fileUrl = $block->getAttachmentUrl($attachment->getFile()); ?>
+                                <a href="<?php /* @noEscape */ echo $fileUrl; ?>" target="_blank" download>
+                                <?php 
+                                    
+                                    $fileInfo =  pathinfo($fileUrl);
+                                    $fileExt = $fileInfo['extension']; ?>
+                                    <?php if($fileExt == 'pdf') {?>
+                                        <img width="50" alt="<?= $attachment->getFile() ?>" height="50" src="https://www.printvision.co.uk/media/label/pdf.png"/>
+                                    <?php } elseif($fileExt == 'ai') { ?>
+                                        <img width="50" alt="<?= $attachment->getFile() ?>" height="50" src="https://www.printvision.co.uk/media/label/ai.png"/>
+                                    <?php } elseif($fileExt == 'indt') { ?>
+                                        <img width="50" alt="<?= $attachment->getFile() ?>" height="50" src="https://www.printvision.co.uk/media/label/indt.png"/>
+                                    <?php } else { ?>
+                                         <img width="50" alt="<?= $attachment->getFile() ?>" height="50" src="https://www.printvision.co.uk/media/label/pdf.png"/>
+                                         <img width="50" alt="<?= $attachment->getFile() ?>" height="50" src="https://www.printvision.co.uk/media/label/ai.png"/>
+                                          <img width="50" alt="<?= $attachment->getFile() ?>" height="50" src="https://www.printvision.co.uk/media/label/indt.png"/>
+                                    <?php } ?>
+                                    </a>
+                                <?php endif; ?>
+                            
+                        </p>
+                    </div>
+                    <?php /* endif; */ ?>
+                </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>

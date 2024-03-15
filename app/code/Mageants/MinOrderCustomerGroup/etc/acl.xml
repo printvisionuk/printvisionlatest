@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- /**
+ * @category  Mageants MinOrderCustomerGroup
+ * @package   Mageants_MinOrderCustomerGroup
+ * @copyright Copyright (c) 2023 Mageants
+ * @author    Mageants Team <support@mageants.com>
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Magento_Sales::config_sales">
+                                <resource id="Mageants_MinOrderCustomerGroup::minimum_order" title="Min Order Customer Group" sortOrder="50" />
+                            </resource>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- /**
+ * Copyright © 2020 Design'N'Buy (inquiry@designnbuy.com). All rights reserved.
+ * 
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
+    <module name="Designnbuy_CustomOptionPlugin" setup_version="1.0.0" schema_version="1.0.0">
+        <sequence>
+            <module name="MageWorx_OptionFeatures"/>
+        <!--    <module name="MageWorx_OptionInventory"/>
+            <module name="MageWorx_OptionBase"/>
+            <module name="MageWorx_OptionDependency"/>
+            <module name="MageWorx_OptionTemplates"/>-->
+		</sequence>
+    </module>
+</config>

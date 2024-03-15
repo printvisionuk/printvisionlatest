@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="magenest_barclaycard_pending_charge" resource="default" engine="innodb" comment="Charge Pending table">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="varchar" name="order_id" nullable="false" length="15" comment="Order ID"/>
+        <column xsi:type="varchar" name="status" length="15" comment="Charge Status"/>
+        <column xsi:type="timestamp" name="created_at" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <index referenceId="MAGENEST_BARCLAYCARD_PENDING_CHARGE_ORDER_ID" indexType="btree">
+            <column name="order_id"/>
+        </index>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

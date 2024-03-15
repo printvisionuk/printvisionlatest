@@ -1,0 +1,331 @@
+<?php
+if($block->getCurrentProduct()->getCustomPricingLogic() && $block->getCurrentProduct()->getSquareAreaPricing()){
+?>
+<script type="text/javascript">
+        require(['jquery',
+            'priceBox',
+            'mage/translate',
+            'Magento_Catalog/js/price-utils',
+            'underscore',
+            'mage/template',
+            'mage/validation',
+            'jquery/ui'
+        ], function($, priceBox, $t, priceUtils, _, mageTemplate) {
+            'use strict';
+
+            var squareAreaPricing = $.parseJSON('<?php echo $block->getCurrentProduct()->getSquareAreaPricing(); ?>');
+
+            jQuery(document).ready(function(){
+              
+                const WidthoptionId = jQuery('#product-options-wrapper div.field[design-tool-type="width"]').attr("data-option_id");
+                const HeightoptionId = jQuery('#product-options-wrapper div.field[design-tool-type="height"]').attr("data-option_id");
+                const SizeoptionId = jQuery('#product-options-wrapper div.field[design-tool-type="sizes"]').attr("data-option_id");
+                
+                var min = 10;
+                var max = 100;
+                var validWidth = false;
+                var validHeight = false;
+
+                var classArrayWidth = jQuery('#product-options-wrapper div.field[design-tool-type="width"]').attr('class').split(' ');
+
+                if(classArrayWidth.length && jQuery('#product-options-wrapper div.field[design-tool-type="width"]').hasClass('pricecalculator-minmax-width')){
+
+                    var filteredClassesMin = classArrayWidth.filter(function(className) {
+                        return className.startsWith('min-');
+                    });
+                    var filteredClassesMax = classArrayWidth.filter(function(className) {
+                        return className.startsWith('max-');
+                    });
+                    var widthMin = filteredClassesMin[0].replace(/^min-/, '');
+                    var widthMax = filteredClassesMax[0].replace(/^max-/, '');
+
+                    $.validator.addMethod('pricecalculator-minmax-width', function(value) {
+                        if (parseFloat(value) < parseFloat(widthMin) || parseFloat(value) > parseFloat(widthMax) || isNaN(value)) {
+                            validWidth = false;
+                            return false;
+                        }
+                        validWidth = true;
+                        return true;
+                    }, $.mage.__('Please enter width between ' + widthMin + ' to ' + widthMax));
+                    
+                    var dataIdWidth = $("#options_"+WidthoptionId+"_text").data("validate");
+
+                    if (!("pricecalculator-minmax-width" in dataIdWidth)) {
+                        var newObj = {
+                            "pricecalculator-minmax-width": true
+                        };
+                        $.extend(dataIdWidth, newObj);
+                        var itemStringify = JSON.stringify(dataIdWidth).replace(/&quot;/g, '"');
+                        $("#options_"+WidthoptionId+"_text").attr("data-validate", itemStringify);
+                    }
+
+                }
+                
+                var classArrayHeight = jQuery('#product-options-wrapper div.field[design-tool-type="height"]').attr('class').split(' ');
+
+                if(classArrayHeight.length && jQuery('#product-options-wrapper div.field[design-tool-type="height"]').hasClass('pricecalculator-minmax-height')){
+
+                    var filteredClassesMin = classArrayHeight.filter(function(className) {
+                        return className.startsWith('min-');
+                    });
+                    var filteredClassesMax = classArrayHeight.filter(function(className) {
+                        return className.startsWith('max-');
+                    });
+                    var heightMin = filteredClassesMin[0].replace(/^min-/, '');
+                    var heightMax = filteredClassesMax[0].replace(/^max-/, '');
+
+                    $.validator.addMethod('pricecalculator-minmax-height', function(value) {
+                        if (parseFloat(value) < parseFloat(heightMin) || parseFloat(value) > parseFloat(heightMax) || isNaN(value)) {
+                            validHeight = false;
+                            return false;
+                        }
+                        validHeight = true;
+                        return true;
+                    }, $.mage.__('Please enter height between ' + heightMin + ' to ' + heightMax));
+                    
+                    var dataIdHeight = $("#options_"+HeightoptionId+"_text").data("validate");
+
+                    if (!("pricecalculator-minmax-height" in dataIdHeight)) {
+                        var newObj = {
+                            "pricecalculator-minmax-height": true
+                        };
+                        $.extend(dataIdHeight, newObj);
+                        var itemStringify = JSON.stringify(dataIdHeight).replace(/&quot;/g, '"');
+                        $("#options_"+HeightoptionId+"_text").attr("data-validate", itemStringify);
+                    }
+
+                }
+
+                jQuery('#product-options-wrapper div.field[design-tool-type="sizes"] .product-custom-option').on("change",function(){
+                    let size = jQuery(this).find(":selected").attr('data-option_sku');
+                    // let width = size.split('x')[0];
+                    // let height = size.split('x')[1];
+                    // jQuery('#product-options-wrapper div.field[design-tool-type="width"] .product-custom-option').val(width).trigger('change');
+                    // jQuery('#product-options-wrapper div.field[design-tool-type="height"] .product-custom-option').val(height).trigger('change');
+                    calculatePrice(jQuery(this));
+                })
+
+                jQuery('#product-options-wrapper .product-custom-option').on("change",function(){
+                    calculatePrice(jQuery(this));
+                })
+                jQuery('#product-options-wrapper div.field[design-tool-type="width"] .product-custom-option').on("input",function(){
+                    var isValid = $(this).valid();
+                    if(isValid){
+                        calculatePrice(jQuery(this));
+                    }
+                })
+                jQuery('#product-options-wrapper div.field[design-tool-type="height"] .product-custom-option').on("input",function(){
+                    var isValid = $(this).valid();
+                    if(isValid){
+                        calculatePrice(jQuery(this));
+                    }
+                })
+                jQuery('#qty').on("input",function(e){
+                    if(e.value != '') calculatePrice(jQuery(this));
+                })
+
+
+                function calculatePrice(obj){
+                    console.log('calculatePrice');
+                    
+                    let area = calculateArea();
+                    debugger;
+                    if(area){
+                        
+                        console.log("area " + area);
+                        //console.log("squareAreaPricing " + squareAreaPricing.toString());
+                        //let unit_measurements = jQuery('#product-options-wrapper div.field[design-tool-type="measurement_unit"] .product-custom-option option:selected').attr("data-option_sku");
+                        let range = findNumberGreterThenCurrentIndexAndLessThenNextIndex(area, squareAreaPricing);
+                        //console.log("range " + range.toString());
+                        //materialWisePricing(squareAreaPricing,area);
+                        let squareAreaPrice = parseFloat(range.price).toFixed(2) * area;
+
+                        let optionId = obj.parents(".field").attr("data-option_id");
+                        
+                        if (jQuery('#product_addtocart_form').data('mageworxOptionBase')?.options?.optionConfig[WidthoptionId].prices) {
+
+                            jQuery('#product_addtocart_form').data('mageworxOptionBase').options.optionConfig[WidthoptionId].prices = {
+                                'finalPrice': {
+                                    'amount': 0
+                                },
+                                'basePrice': {
+                                    'amount': 0
+                                },
+                                'oldPrice': {
+                                    'amount': 0
+                                }
+                            };
+                        }
+                        if (jQuery('#product_addtocart_form').data('mageworxOptionBase')?.options?.optionConfig[HeightoptionId].prices) {
+
+                            jQuery('#product_addtocart_form').data('mageworxOptionBase').options.optionConfig[HeightoptionId].prices = {
+                                'finalPrice': {
+                                    'amount': 0
+                                },
+                                'basePrice': {
+                                    'amount': 0
+                                },
+                                'oldPrice': {
+                                    'amount': 0
+                                }
+                            };
+
+                            jQuery('#product_addtocart_form').data('mageworxOptionBase').options.optionConfig[HeightoptionId].prices = {
+                                'finalPrice': {
+                                    'amount': squareAreaPrice
+                                },
+                                'basePrice': {
+                                    'amount': squareAreaPrice
+                                },
+                                'oldPrice': {
+                                    'amount': squareAreaPrice
+                                }
+                            };
+                            jQuery(".product-info-price .price-box span.price-wrapper .price").text(priceUtils.formatPrice(squareAreaPrice));
+                        }
+                        if(jQuery('#product-options-wrapper div.field[design-tool-type="sizes"] .product-custom-option option:selected').attr('data-option_sku') != 'custom'){
+
+                            let sizeSelecteOptionId = jQuery('#product-options-wrapper div.field[design-tool-type="sizes"] .product-custom-option option:selected').val();
+
+                            if (jQuery('#product_addtocart_form').data('mageworxOptionBase')?.options?.optionConfig[SizeoptionId][sizeSelecteOptionId].prices) {
+
+                                jQuery('#product_addtocart_form').data('mageworxOptionBase').options.optionConfig[SizeoptionId][sizeSelecteOptionId].prices = {
+                                    'finalPrice': {
+                                        'amount': 0
+                                    },
+                                    'basePrice': {
+                                        'amount': 0
+                                    },
+                                    'oldPrice': {
+                                        'amount': 0
+                                    }
+                                };
+
+                                jQuery('#product_addtocart_form').data('mageworxOptionBase').options.optionConfig[SizeoptionId][sizeSelecteOptionId].prices = {
+                                    'finalPrice': {
+                                        'amount': squareAreaPrice
+                                    },
+                                    'basePrice': {
+                                        'amount': squareAreaPrice
+                                    },
+                                    'oldPrice': {
+                                        'amount': squareAreaPrice
+                                    }
+                                };
+
+                            }
+                        }
+                        jQuery("#form_data").val(btoa("n0gVzJSTNllULhMv-" + squareAreaPrice))
+                        // jQuery('#product_addtocart_form').data('magePriceOptions').options.optionConfig[optionId].prices = {
+                        //     'finalPrice': {
+                        //         'amount': squareAreaPrice
+                        //     },
+                        //     'basePrice': {
+                        //         'amount': squareAreaPrice
+                        //     },
+                        //     'oldPrice': {
+                        //         'amount': squareAreaPrice
+                        //     }
+                        // };
+                        
+                    }
+                }
+
+                function findNumberGreterThenCurrentIndexAndLessThenNextIndex(number, array){
+                    let index = 0;
+                    for (let i = 0; i < array.length; i++) {
+                        if(parseInt(number) <= parseInt(array[i].square_area) && parseInt(number) < parseInt(array[i+1].square_area)){
+                            index = i;
+                            break;
+                        }
+                    }
+                    return array[index];
+                }
+
+                function calculateArea(){
+                    
+                    let width;
+                    let height;
+                    if(jQuery('#product-options-wrapper div.field[design-tool-type="sizes"] .product-custom-option option:selected').attr('data-option_sku') != 'custom'){
+                        let sizes = jQuery('#product-options-wrapper div.field[design-tool-type="sizes"] .product-custom-option option:selected').attr('data-option_sku');
+                        width = parseFloat(sizes.split('x')[0]);
+                        height = parseFloat(sizes.split('x')[1]);
+                    } else {
+                        width = parseFloat(jQuery('#product-options-wrapper div.field[design-tool-type="width"] .product-custom-option').val());
+                        height = parseFloat(jQuery('#product-options-wrapper div.field[design-tool-type="height"] .product-custom-option').val());
+                    }
+                    let unit_measurement = jQuery('#product-options-wrapper div.field[design-tool-type="measurement_unit"] .product-custom-option option:selected').attr("data-option_sku");
+                    let qty = parseInt(jQuery('#qty').val());
+                    
+                    if(!width || !height){
+                        return 0;
+                    }
+                    
+                    let area = 1;
+                    if (unit_measurement == 'mm'){
+
+                        area = (( (width/1000) * height/1000 ) * qty);
+
+                    } else if (unit_measurement == 'feet'){
+
+                        area = (( (width*305/1000) * height*305/1000)* qty);
+
+                    } else if (unit_measurement == 'inch'){
+
+                        area = (( ((width/0.03937)/1000) * (height/0.03937)/1000)* qty);
+
+                    } else if (unit_measurement == 'cm'){
+
+                        area = (( (width*10/1000) * (height*10/1000) )* qty);
+
+                    } else {
+
+                        area = (width * height * qty);
+
+                    }
+                    console.log("area : " + parseFloat(area).toFixed(3));
+                    return parseFloat(area).toFixed(3);
+                }
+
+                function materialWisePricing(material,area)
+                {
+                    let mPrice = 0;
+                    if(material == "100gsm_polyester_flag_fabric")
+                    {
+                        if (area <= 10) {
+                            mPrice = area * 15
+                        } else if (area <= 25) {
+                            mPrice = area * 13.5
+                        } else if (area <= 49) {
+                            mPrice = area * 11.5
+                        } else if (area <= 99) {
+                            mPrice = area * 10.5
+                        } else if (area <= 199) {
+                            mPrice = area * 9.5
+                        } else if (area <= 299) {
+                            mPrice = area * 8.5
+                        }
+                    }
+                    return mPrice;
+                }
+
+            });
+            jQuery(window).load(function(){
+                setTimeout(function(){
+                    if(jQuery('#product-options-wrapper div.field[design-tool-type="sizes"] .product-custom-option option:selected').attr('data-option_sku') != 'custom'){
+                        jQuery('#product-options-wrapper div.field[design-tool-type="sizes"] .product-custom-option').trigger('change');
+                    } else {
+                        if(jQuery('#product-options-wrapper div.field[design-tool-type="width"] .product-custom-option').val() && jQuery('#product-options-wrapper div.field[design-tool-type="height"] .product-custom-option').val()){
+                            jQuery('#product-options-wrapper div.field[design-tool-type="width"] .product-custom-option').trigger('change');
+                            jQuery('#product-options-wrapper div.field[design-tool-type="height"] .product-custom-option').trigger('change');
+                        }
+                    }
+                }, 300);
+            })
+
+        });
+</script>
+<?php
+}
+?>
+<input type="hidden" name="form_data" id="form_data" value="" />

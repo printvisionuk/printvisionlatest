@@ -1,0 +1,46 @@
+<?php
+/**
+ * @author Elsner Team
+ * @copyright Copyright (c) 2023 Elsner Technologies Pvt. Ltd (https://www.elsner.com/)
+ * @package Elsnertech_Christmasfestive
+ */
+
+  $current_date =  $block->currentDate();
+  $moduleEnableStatus = $block->moduleEnable();
+  $footermoduleStatus = $block->footerEnable();
+  $footerstartdate = $block->footerFromdate();
+  $footerenddate = $block->footerTodate();
+  $base_path = $block->footerPattern();
+
+  $snowmanmoduleStatus = $block->snowmanEnable();
+  $snowmanstartdate = $block->snowmanFromdate();
+  $snowmanenddate = $block->snowmanTodate();
+  $snowman_path = $block->snowmanPattern();
+  $snowmanPostion=$block->snowmanPosition();
+?>
+<?php if ($moduleEnableStatus == 1): ?>
+    <script type="text/x-magento-init">
+      {
+          "*": {
+              "Elsnertech_Christmasfestive/js/custom": {
+                "footermoduleStatus": "<?=/* @noEscape */ $footermoduleStatus ?>",
+                "base_path" :  "<?=/* @noEscape */ $base_path ?>",
+                "snowman_path" :  "<?=/* @noEscape */ $snowman_path ?>"
+              }
+        }
+      }
+    </script>
+    <?php if ($snowmanmoduleStatus == 1):
+        if (($current_date >= $snowmanstartdate) && ($current_date <= $snowmanenddate)): ?>
+            <div class="snow_man snow_man_<?=/* @noEscape */ $snowmanPostion; ?>">
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if ($footermoduleStatus == 1):
+        if (($current_date >= $footerstartdate) && ($current_date <= $footerenddate)): ?>
+          <div class="footerdecorate" id="footer_decoration">            
+          </div>
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endif; ?>

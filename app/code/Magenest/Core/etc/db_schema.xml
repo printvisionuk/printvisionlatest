@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+ * @package Magento 2 Base Package
+ */-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="adminnotification_inbox" resource="default" engine="innodb">
+        <column xsi:type="smallint"
+                name="is_magenest"
+                nullable="true"
+                comment="Is Magenest"/>
+        <column xsi:type="int"
+                name="magenest_id"
+                nullable="true"
+                comment="Magenest notification ID"/>
+    </table>
+</schema>

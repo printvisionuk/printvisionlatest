@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magento\CatalogStaging\Ui\DataProvider\Product\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="lr-custom-pricing-all" xsi:type="array">
+                    <item name="class" xsi:type="string">LR\CustomOptionPricing\Ui\DataProvider\Product\Form\Modifier\All</item>
+                    <item name="sortOrder" xsi:type="number">71</item>
+                </item>
+                <item name="lr-option-value-advanced-price-type" xsi:type="array">
+                    <item name="class" xsi:type="string">LR\CustomOptionPricing\Ui\DataProvider\Product\Form\Modifier\OptionValuePriceType</item>
+                    <item name="sortOrder" xsi:type="number">150</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="lr-custom-pricing-all" xsi:type="array">
+                    <item name="class" xsi:type="string">LR\CustomOptionPricing\Ui\DataProvider\Product\Form\Modifier\All</item>
+                    <item name="sortOrder" xsi:type="number">71</item>
+                </item>
+                <item name="lr-option-value-advanced-price-type" xsi:type="array">
+                    <item name="class" xsi:type="string">LR\CustomOptionPricing\Ui\DataProvider\Product\Form\Modifier\OptionValuePriceType</item>
+                    <item name="sortOrder" xsi:type="number">150</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="LR\CustomOptionPricing\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="lr-custom-option-value-pricing" xsi:type="array">
+                    <item name="class" xsi:type="string">LR\CustomOptionPricing\Ui\DataProvider\Product\Form\Modifier\OptionValueAdvancedPricing</item>
+                    <item name="sortOrder" xsi:type="number">72</item>
+                </item>
+                <item name="lr-custom-option-value-price-type" xsi:type="array">
+                    <item name="class" xsi:type="string">LR\CustomOptionPricing\Ui\DataProvider\Product\Form\Modifier\OptionValuePriceType</item>
+                    <item name="sortOrder" xsi:type="number">150</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+
+    <virtualType name="MageWorx\OptionTemplates\Ui\DataProvider\Group\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="lr-custom-pricing-all" xsi:type="array">
+                    <item name="class" xsi:type="string">LR\CustomOptionPricing\Ui\DataProvider\Product\Form\Modifier\All</item>
+                    <item name="sortOrder" xsi:type="number">72</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="LR\CustomOptionPricing\Ui\DataProvider\Product\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="LR\CustomOptionPricing\Ui\DataProvider\Product\Form\Modifier\All">
+        <arguments>
+            <argument name="pool" xsi:type="object">LR\CustomOptionPricing\Ui\DataProvider\Product\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+    <virtualType name="LR\CustomOptionPricing\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="lr-custom-pricing" xsi:type="array">
+                    <item name="class" xsi:type="string">LR\CustomOptionPricing\Ui\DataProvider\Product\Form\Modifier\CustomPrice</item>
+                    <item name="sortOrder" xsi:type="number">72</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>

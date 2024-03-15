@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 Magenest. All rights reserved.
+ */
+-->
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="barclaycard_required_config" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label><![CDATA[Required Settings]]></label>
+        <comment>Barclaycard ePDQ Config</comment>
+        <field id="pspid" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>PSPID</label>
+            <config_path>payment/magenest_barclaycard/pspid</config_path>
+            <comment>(Barclaycard ePDQ) Your affiliation name in our system.</comment>
+        </field>
+        <field id="hash_algorithm" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Hash algorithm</label>
+            <config_path>payment/magenest_barclaycard/hash_algorithm</config_path>
+            <source_model>Magenest\Barclaycard\Model\Source\HashAlgorithm</source_model>
+            <comment>
+                <![CDATA[
+                        (Barclaycard ePDQ) Sha-out phrase can get in "Configuration->Technical information->Global security parameters"
+                        <br>
+                        <strong>Choose sha-256 or higher to have more secure but slower validate processing</strong>
+                        <br>
+                        <strong>
+                            Hash algorithm must be same config with Barclaycard ePDQ config
+                        </strong>
+                        ]]>
+            </comment>
+        </field>
+        <field id="order_prefix" translate="label" type="text" sortOrder="95" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Order prefix</label>
+            <config_path>payment/magenest_barclaycard/order_prefix</config_path>
+            <comment>Enter some prefix character (max 5 characters)</comment>
+            <validate>validate-length maximum-length-5</validate>
+        </field>
+    </group>
+</include>

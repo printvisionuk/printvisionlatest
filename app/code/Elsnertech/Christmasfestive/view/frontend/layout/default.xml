@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author Elsner Team
+* @copyright Copyright (c) 2023 Elsner Technologies Pvt. Ltd (https://www.elsner.com/)
+* @package Elsnertech_Christmasfestive
+*/
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+     <!-- <head>
+        <css src="Elsnertech_Christmasfestive::csschristmasfestive/custom.css" />
+        <link src="Elsnertech_Christmasfestive/js/jquery-1.9.0.min.js"/>
+        <link src="Elsnertech_Christmasfestive/js/hse/hse.js"/>
+        <link src="Elsnertech_Christmasfestive/js/prototype.js"/>
+        <link src="Elsnertech_Christmasfestive/js/snowflakes.js"/>
+    </head> -->
+     <body>
+
+        <referenceContainer name='root'>
+            <block
+                class='Elsnertech\Christmasfestive\Block\Adminhtml\Init'
+                name='Elsnertech_Christmasfestive_Block_Init'
+                
+            />
+        </referenceContainer>
+
+        <referenceContainer name="root">			
+			<block class="Elsnertech\Christmasfestive\Block\Adminhtml\Christmasfestive\Index" name="christmasfestive_index" template="christmasfestive/index.phtml" after="-">
+			</block>
+        </referenceContainer>   
+
+        <referenceContainer name="root">			
+			<block class="Elsnertech\Christmasfestive\Block\Adminhtml\Christmasfestive\Heddecorate" name="christmasfestive_header" template="christmasfestive/heddecorate.phtml" after="after.body.start" ifconfig="christmas/generalheader/headerenable">
+			</block>
+        </referenceContainer>   
+
+         <referenceContainer name="root">           
+            <block class="Elsnertech\Christmasfestive\Block\Adminhtml\Christmasfestive\Snowflakes" name="christmasfestive_snowflakes" template="christmasfestive/snowflakes.phtml" ifconfig="christmas/generalsnowflakes/snowflakesenable">
+            </block>
+        </referenceContainer>   
+    </body>
+</page>

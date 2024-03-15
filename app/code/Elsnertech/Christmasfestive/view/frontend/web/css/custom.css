@@ -1,0 +1,22 @@
+.headerdecorate{ position: fixed; top: 0; width: 100%; z-index: 50;}
+.footerdecorate { bottom: 0; left: 0; position: fixed; width: 100%; z-index: 50;}
+.snow_man { background-size: cover !important; position: fixed; width: 288px; z-index: 50;}
+.snow_man_left{bottom: 0; left: 0;}
+.snow_man_right{bottom: 0; right: 0;}
+.santa_cluse { position: fixed; width: 290px; z-index: 50;}
+.new_year_ball{ position: fixed; z-index: 50; top:0; width:192px;}
+.new_year_ball_left{ left:0;}
+.new_year_ball_right{ right:0;}
+
+
+@media (max-width: 767px) {
+.snow_man {
+  height: 131px!important;
+  width: 114px;
+}
+.footerdecorate {
+  background-size: cover!important;
+  height: 80px!important;
+}
+				
+}

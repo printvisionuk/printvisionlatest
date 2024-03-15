@@ -1,0 +1,29 @@
+{
+  "name": "elsnertech/module-christmasfestive",
+  "description": "Christmas Snowfall Effects",
+  "require": {
+    "php": "~7.0.0|8.1"
+  },
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "authors": [
+    {
+      "name": "Bindiya Hirapara",
+      "email": "bindiya@xhtmljunkies.com",
+      "homepage": "http://www.elsner.com/magento-extension/",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Elsnertech\\Christmasfestive\\": ""
+    }
+  }
+}

@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author Elsner Team
+* @copyright Copyright (c) 2023 Elsner Technologies Pvt. Ltd (https://www.elsner.com/)
+* @package Elsnertech_Christmasfestive
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+  <system>
+      <tab id="elsnertech" translate="label" sortOrder="100">
+          <label>Elsnertech</label>
+      </tab>
+    <section id="christmas" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Christmas Special Effect</label>
+      <tab>elsnertech</tab>
+      <resource>Christmas_Settings::christmas_configuration</resource>
+      <group id="generalenable" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+        <label>Enable Module</label>
+          <field id="modulenable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+              <label>Module Enable</label>
+              <comment>Enable / Disable setting.</comment>
+              <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+          </field> 
+      </group>
+
+      <group id="generalheader" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Header Decorations</label>
+          <field id="headerenable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+              <label>Enable</label>
+              <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+          </field> 
+
+          <field id="hedfromdate" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+              <label>Start Date</label>
+              <frontend_model>Elsnertech\Christmasfestive\Block\Adminhtml\DatePicker</frontend_model>
+              <validate>required-entry validate-date </validate> 
+          </field>
+
+          <field id="hedtodate" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+              <label>End Date</label>
+              <frontend_model>Elsnertech\Christmasfestive\Block\Adminhtml\DatePicker</frontend_model>
+              <validate>required-entry validate-date </validate> 
+          </field>
+
+          <field id="header_file_upload" translate="label" type="image" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+              <label>Upload custom file</label>
+              <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+              <base_url type="media" scope_info="1">Christmasfestive</base_url>
+              <upload_dir config="system" scope_info="1">Christmasfestive</upload_dir>
+              <comment><![CDATA[Allowed file types: jpeg, gif, png.]]></comment>
+          </field>        
+      </group>
+
+      <group id="generalfooter" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Footer Decorations</label>
+          <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+              <label>Enable</label>
+              <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+          </field> 
+
+          <field id="startdate" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+              <label>Start Date</label>
+              <frontend_model>Elsnertech\Christmasfestive\Block\Adminhtml\DatePicker</frontend_model>     
+          </field>
+
+          <field id="todate" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+              <label>End Date</label>
+              <frontend_model>Elsnertech\Christmasfestive\Block\Adminhtml\DatePicker</frontend_model>
+              <validate>required-entry validate-date </validate> 
+          </field>
+    
+          <field id="custom_file_upload" translate="label" type="image" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+              <label>Upload custom file</label>
+              <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+              <upload_dir config="system" scope_info="1">Christmasfestive</upload_dir>
+              <base_url type="media" scope_info="1">Christmasfestive</base_url>
+              <comment><![CDATA[Allowed file types: jpeg, gif, png.]]></comment>
+          </field>
+      </group>
+
+      <group id="generalsantacluse" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Santa Clause</label>
+          <field id="santaenable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+              <label>Enable</label>
+              <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+          </field>
+
+          <field id="santafromdate" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+              <label>Start Date</label>
+              <frontend_model>Elsnertech\Christmasfestive\Block\Adminhtml\DatePicker</frontend_model>
+              <validate>required-entry validate-date </validate> 
+          </field>
+
+          <field id="santatodate" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+              <label>End Date</label>
+              <frontend_model>Elsnertech\Christmasfestive\Block\Adminhtml\DatePicker</frontend_model>
+              <validate>required-entry validate-date </validate> 
+          </field>
+
+          <field id="santacustom_file_upload" translate="label" type="image" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+              <label>Upload custom file</label>
+              <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+              <upload_dir config="system" scope_info="1">Christmasfestive</upload_dir>
+              <base_url type="media" scope_info="1">Christmasfestive</base_url>
+              <comment><![CDATA[Allowed file types: jpeg, gif, png.]]></comment>
+          </field>
+      </group>
+
+      <group id="generalsnowflakes" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Snow Flakes</label>
+          <field id="snowflakesenable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+          </field> 
+            
+          <field id="Snowflakescolors" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Colors Of Snowflakes</label>
+                <validate>required-entry</validate>
+                <comment>CSS values: #e6f2ff, #eee, silver</comment>
+          </field>
+
+          <field id="Snowflakes" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Snowflakes</label>
+                <source_model>Elsnertech\Christmasfestive\Model\Config\Source\SnowFlakes</source_model>
+                <comment>Unicode characters like &#x2744; &#10053; &#10054; &#9733; &#9734;</comment>
+          </field>
+
+          <field id="snowspedd" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Snow Speed</label>
+                <source_model>Elsnertech\Christmasfestive\Model\Config\Source\SnowSpeed</source_model>
+                <validate>validate-number</validate>
+          </field>
+
+          <field id="minsnowflakes" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Minimum Snowflakes Size</label>
+                <validate>validate-number validate-digits-range digits-range-10-25"</validate>
+                <comment>Enter Snowflakes Between 10 To 25</comment>
+          </field>
+
+          <field id="maxsnowflakes" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Maximum Snowflakes Size</label>
+                <validate>validate-number validate-digits-range digits-range-50-100"</validate>
+                <comment>Enter Snowflakes Between 50 To 100</comment>
+          </field>
+      </group>
+
+      <group id="newyearball" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>New Year Ball</label>
+          <field id="ballenable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+          </field> 
+
+          <field id="ballfromdate" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Start Date</label>
+                <frontend_model>Elsnertech\Christmasfestive\Block\Adminhtml\DatePicker</frontend_model>
+                <validate>required-entry validate-date </validate> 
+          </field>
+
+          <field id="balltodate" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>End Date</label>
+                <frontend_model>Elsnertech\Christmasfestive\Block\Adminhtml\DatePicker</frontend_model>
+                <validate>required-entry validate-date </validate> 
+          </field>
+
+          <field id="ballpostion" translate="label comment" sortOrder="4" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Position</label>
+                <comment>Set Postion</comment>
+                <source_model>Elsnertech\Christmasfestive\Model\Config\Source\BallPostion</source_model>
+          </field>
+
+          <field id="ball_file_upload" translate="label" type="image" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Upload custom file</label>
+                <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                <upload_dir config="system" scope_info="1">Christmasfestive</upload_dir>
+                <base_url type="media" scope_info="1">Christmasfestive</base_url>
+                <comment><![CDATA[Allowed file types: jpeg, gif, png.]]></comment>
+          </field>
+      </group>
+
+      <group id="generalsnowman" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Snow Man</label>
+          <field id="snowmanenable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+          </field> 
+
+          <field id="snowmanfromdate" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Start Date</label>
+                <frontend_model>Elsnertech\Christmasfestive\Block\Adminhtml\DatePicker</frontend_model>
+                <validate>required-entry validate-date </validate> 
+          </field>
+
+          <field id="snowmantodate" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>End Date</label>
+                <frontend_model>Elsnertech\Christmasfestive\Block\Adminhtml\DatePicker</frontend_model>
+                <validate>required-entry validate-date </validate> 
+          </field>
+
+          <field id="snowmanpostion" translate="label comment" sortOrder="4" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+              <label>Position</label>
+              <comment>Set Snow Man Postion</comment>
+              <source_model>Elsnertech\Christmasfestive\Model\Config\Source\SnowmanPostion</source_model>
+          </field>
+
+          <field id="snowman_file_upload" translate="label" type="image" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" >
+              <label>Upload custom file</label>
+              <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+              <upload_dir config="system" scope_info="1">Christmasfestive</upload_dir>
+              <base_url type="media" scope_info="1">Christmasfestive</base_url>
+              <comment><![CDATA[Allowed file types: jpeg, gif, png.]]></comment>
+          </field>
+      </group>
+    </section>
+  </system>
+</config>

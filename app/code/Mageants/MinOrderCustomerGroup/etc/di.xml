@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- /**
+ * @category  Mageants MinOrderCustomerGroup
+ * @package   Mageants_MinOrderCustomerGroup
+ * @copyright Copyright (c) 2023 Mageants
+ * @author    Mageants Team <support@mageants.com>
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	
+	<type name="Magento\Quote\Model\Quote\Address">
+        <plugin name="mageants_after_validateMinimumAmount" type="Mageants\MinOrderCustomerGroup\Plugin\Quote\Model\Quote\Address" sortOrder="1" />
+    </type>
+    
+    <type name="Magento\Quote\Model\Quote\Validator\MinimumOrderAmount\ValidationMessage">
+        <plugin name="mageants_after_validationMessage" type="Mageants\MinOrderCustomerGroup\Plugin\Quote\Model\Quote\Validator\MinimumOrderAmount\ValidationMessage" sortOrder="1" />
+    </type>
+  	<type name="Magento\Quote\Model\Quote">
+        <plugin name="mageants_validate_multiaddress" type="Mageants\MinOrderCustomerGroup\Plugin\Quote\Model\Quote" sortOrder="1" />
+    </type>
+    <preference for="Magento\Quote\Model\ShippingAddressManagement" type="Mageants\MinOrderCustomerGroup\Model\Quote\ShippingAddressManagement" /> 
+    
+    <preference for="Magento\Store\Model\StoreSwitcher\HashGenerator" type="Mageants\MinOrderCustomerGroup\Model\StoreSwitcher\HashGenerator" />
+    
+</config>

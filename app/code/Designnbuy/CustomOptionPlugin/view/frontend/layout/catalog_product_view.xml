@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- /**
+ * Copyright © 2020 Design'N'Buy (inquiry@designnbuy.com). All rights reserved.
+ * 
+ */ -->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+	    <referenceBlock name="product.info.form.options">
+	      	<!-- <block class="Designnbuy\Pricecalculator\Block\Pricecalculate" after="product.info.options.wrapper" name="productcalculate.info" as="pricecalculate" template="Designnbuy_Pricecalculator::pricecalculate.phtml" /> -->
+	      	<block class="Designnbuy\CustomOptionPlugin\Block\Pricecalculate" after="product.info.options.wrapper" name="productcalculate.info" as="pricecalculate" template="Designnbuy_CustomOptionPlugin::pricecalculate.phtml" />
+	    </referenceBlock>
+	</body>
+</page>

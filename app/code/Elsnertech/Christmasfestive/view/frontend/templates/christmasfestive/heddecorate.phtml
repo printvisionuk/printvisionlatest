@@ -1,0 +1,68 @@
+<?php
+/**
+ * @author Elsner Team
+ * @copyright Copyright (c) 2023 Elsner Technologies Pvt. Ltd (https://www.elsner.com/)
+ * @package Elsnertech_Christmasfestive
+ */
+
+  $current_date =  $block->currentDate();
+  $moduleEnableStatus = $block->moduleEnable();
+  $headerstartdate = $block->headerFromdate();
+  $headermoduleStatus = $block->headerEnable();
+  $headerenddate = $block->headerTodate();
+  $header_path = $block->headerPattern();
+
+  $ballmoduleStatus = $block->newYearballEnable();
+  $ballstartdate = $block->ballFromdate();
+  $ballenddate = $block->ballTodate();
+  $ball_path = $block->ballPattern();
+  $ballPostion=$block->ballPosition();
+
+  $santamoduleStatus = $block->santaEnable();
+  $santastartdate = $block->santaFromdate();
+  $santaenddate = $block->santaTodate();
+  $santa_path = $block->santaPattern();
+?>
+<?php if ($moduleEnableStatus == 1): ?>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Elsnertech_Christmasfestive/js/custom_1": {
+                  "headermoduleStatus": "<?=/* @noEscape */ $headermoduleStatus ?>",
+                  "header_path" :  "<?=/* @noEscape */ $header_path ?>",
+                  "ball_path" :  "<?=/* @noEscape */ $ball_path ?>"
+                }
+          }
+        }
+    </script>
+    <?php if ($headermoduleStatus == 1):
+        if (($current_date >= $headerstartdate) && ($current_date <= $headerenddate)): ?>
+           <div class="headerdecorate"></div>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if ($ballmoduleStatus):
+        if (($current_date >= $ballstartdate) && ($current_date <= $ballenddate)): ?>
+            <div class="new_year_ball new_year_ball_<?=/* @noEscape */ $ballPostion; ?>">
+             <img src="<?=/* @noEscape */ $header_path; ?>"; />
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if ($santamoduleStatus):
+        if (($current_date >= $santastartdate) && ($current_date <= $santaenddate)): ?>
+            <div class="santa_cluse" id="christmas_thatha_image">
+               <img src="">
+            </div>
+
+        <script>         
+          require(['jquery','Elsnertech_Christmasfestive/js/prototype','Elsnertech_Christmasfestive/js/snowflakes',
+           'Elsnertech_Christmasfestive/js/hse/hse'],
+          function($,prototype,snowflakes,hse)
+          {
+           thatha_fly('no_flip',15000,'<?=/* @noEscape */ $santa_path; ?>','<?=/* @noEscape */ $santa_path; ?>');
+          });
+        </script>
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Magenest_Barclaycard::barclaycard"
+             title="Barclaycard"
+             module="Magenest_Barclaycard"
+             sortOrder="30"
+             dependsOnModule="Magenest_Barclaycard"
+             resource="Magenest_Barclaycard::barclaycard"/>
+
+        <add id="Magenest_Barclaycard::settings"
+             title="Settings"
+             module="Magenest_Barclaycard"
+             sortOrder="20"
+             parent="Magenest_Barclaycard::barclaycard"
+             action="adminhtml/system_config/edit/section/payment/magenest_barclaycard/barclaycard_hpp/"
+             resource="Magenest_Barclaycard::settings"/>
+    </menu>
+</config>

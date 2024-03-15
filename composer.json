@@ -1,0 +1,99 @@
+{
+    "name": "magento/project-community-edition",
+    "description": "eCommerce Platform for Growth (Community Edition)",
+    "type": "project",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "magento/magento-composer-installer": true,
+            "magento/composer-dependency-version-audit-plugin": true,
+            "magento/inventory-composer-installer": true,
+            "magento/composer-root-update-plugin": true,
+            "laminas/laminas-dependency-plugin": true
+        }
+    },
+    "require": {
+        "auctane/api": "v2.4.1",
+        "faonni/magento-price": "^1.2",
+        "fooman/connect-sub-m2": "^8.0",
+        "idealpostcodes/module-ukaddresssearch": "v2.3.0",
+        "iwd/opc": "v5.0.0",
+        "laminas/laminas-serializer": "^2.14",
+        "magento/composer-root-update-plugin": "~2.0",
+        "magento/module-page-builder": "2.2.2",
+        "magento/product-community-edition": "2.4.4",
+        "magepow/cancelorder": "^1.0",
+        "magepow/categories": "^1.0",
+        "panique/php-sass": "^1.0",
+        "reviewscouk/reviews": "^0.0.62",
+        "shipperhq/module-shipper": "^20.53",
+        "spipu/html2pdf": "^5.2",
+        "stripe/stripe-php": "^6",
+        "tecnickcom/tcpdf": "^6.3"
+    },
+    "require-dev": {
+        "allure-framework/allure-phpunit": "~1.5",
+        "lusitanian/oauth": "~0.8.10",
+        "magento/magento-coding-standard": "~3.0.0",
+        "magento/magento2-functional-testing-framework": "^3.10",
+        "pdepend/pdepend": "2.5.2",
+        "phpmd/phpmd": "@stable",
+        "phpunit/phpunit": "^9.5",
+        "sebastian/phpcpd": "^6.0",
+        "squizlabs/php_codesniffer": "~3.4.0"
+    },
+    "conflict": {
+        "gene/bluefoot": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Magento\\Framework\\": "lib/internal/Magento/Framework/",
+            "Magento\\Setup\\": "setup/src/Magento/Setup/",
+            "Magento\\": "app/code/Magento/",
+            "Zend\\Mvc\\Controller\\": "setup/src/Zend/Mvc/Controller/"
+        },
+        "psr-0": {
+            "": [
+                "app/code/",
+                "generated/code/"
+            ]
+        },
+        "files": [
+            "app/etc/NonComposerComponentRegistration.php"
+        ],
+        "exclude-from-classmap": [
+            "**/dev/**",
+            "**/update/**",
+            "**/Test/**"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Magento\\Sniffs\\": "dev/tests/static/framework/Magento/Sniffs/",
+            "Magento\\Tools\\": "dev/tools/Magento/Tools/",
+            "Magento\\Tools\\Sanity\\": "dev/build/publication/sanity/Magento/Tools/Sanity/",
+            "Magento\\TestFramework\\Inspection\\": "dev/tests/static/framework/Magento/TestFramework/Inspection/",
+            "Magento\\TestFramework\\Utility\\": "dev/tests/static/framework/Magento/TestFramework/Utility/"
+        }
+    },
+    "version": "2.4.4",
+    "minimum-stability": "stable",
+    "repositories": {
+        "0": {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        },
+        "fooman": {
+            "type": "composer",
+            "url": "https://customer-repos.fooman.co.nz/www.printvision.co.uk-04632a9eb0247fce4931dca43773c39e20115005"
+        }
+    },
+    "extra": {
+        "magento-force": "override"
+    }
+}

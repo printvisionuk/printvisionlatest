@@ -1,0 +1,15 @@
+#<IfModule mod_rewrite.c>
+#Redirect 301 / https://9378b84786.nxcli.io/
+#</IfModule>
+
+RewriteCond %{HTTP_HOST} ^printvision.co.uk/adminaa$ [NC]
+RewriteRule (.*) http://www.printvision.co.uk/adminaa/$1 [R=301,L] 
+
+
+RewriteEngine on
+RewriteCond %{REQUEST_URI} !^/pub/
+RewriteCond %{REQUEST_URI} !^/setup/
+RewriteCond %{REQUEST_URI} !^/update/
+RewriteCond %{REQUEST_URI} !^/dev/
+RewriteRule .* /pub/$0 [L]
+DirectoryIndex index.php

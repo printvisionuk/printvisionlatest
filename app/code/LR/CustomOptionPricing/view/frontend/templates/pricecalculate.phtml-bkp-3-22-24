@@ -41,10 +41,6 @@ if($block->getCurrentProduct()->getCustomPricingLogic() && $block->getCurrentPro
                 const WidthoptionId = jQuery('#product-options-wrapper div.field[design-tool-type="width"]').attr("data-option_id");
                 const HeightoptionId = jQuery('#product-options-wrapper div.field[design-tool-type="height"]').attr("data-option_id");
                 const SizeoptionId = jQuery('#product-options-wrapper div.field[design-tool-type="sizes"]').attr("data-option_id");
-                //Bhavik
-                //Checking number of options available in size dropdown. if there is only custom then dropdown will have 2 options one is please select and other one is custom
-                const sizeOptionsLength = jQuery('#product-options-wrapper div.field[design-tool-type="sizes"] .product-custom-option > option').length;
-                //Bhavik
                 var min = 10;
                 var max = 100;
                 var validWidth = false;
@@ -65,9 +61,8 @@ if($block->getCurrentProduct()->getCustomPricingLogic() && $block->getCurrentPro
 
                         // Code by Vips starts
                         const sizeType = jQuery('#product-options-wrapper div.field[design-tool-type="sizes"] .product-custom-option option:selected').attr("data-option_sku");
-                        //Bhavik
-                        // In below condition we are checking if sizetype is custom(which is needed when we have multiple sizes in dropdown) and other is number of options. so if there is only one option in list it will go inside loop
-                        if(sizeOptionsLength <= 2 || sizeType == 'custom')
+
+                        if(sizeType == 'custom')
                         {
                             if(window.localStorage["selected_unit"])
                             {
@@ -322,9 +317,7 @@ if($block->getCurrentProduct()->getCustomPricingLogic() && $block->getCurrentPro
                             };
                             jQuery(".product-info-price .price-box span.price-wrapper .price").text(priceUtils.formatPrice(squareAreaPrice));
                         }
-                        //Bhavik
-                        // in below condition is reverse of above condition if more than 2 is there and selected is not custom then only it will go inside loop
-                        if(jQuery('#product-options-wrapper div.field[design-tool-type="sizes"] .product-custom-option option:selected').attr('data-option_sku') != 'custom' && sizeOptionsLength > 2){
+                        if(jQuery('#product-options-wrapper div.field[design-tool-type="sizes"] .product-custom-option option:selected').attr('data-option_sku') != 'custom'){
 
                             let sizeSelecteOptionId = jQuery('#product-options-wrapper div.field[design-tool-type="sizes"] .product-custom-option option:selected').val();
 
@@ -393,9 +386,7 @@ if($block->getCurrentProduct()->getCustomPricingLogic() && $block->getCurrentPro
                     
                     let width;
                     let height;
-                    //Bhavik
-                    // in below condition is same as second if more than 2 is there and selected is not custom then only it will go inside loop
-                    if(jQuery('#product-options-wrapper div.field[design-tool-type="sizes"] .product-custom-option option:selected').attr('data-option_sku') != 'custom' && sizeOptionsLength > 2){
+                    if(jQuery('#product-options-wrapper div.field[design-tool-type="sizes"] .product-custom-option option:selected').attr('data-option_sku') != 'custom'){
                         let sizes = jQuery('#product-options-wrapper div.field[design-tool-type="sizes"] .product-custom-option option:selected').attr('data-option_sku');
                         if(sizes != undefined) {
                             width = parseFloat(sizes.split('x')[0]);
